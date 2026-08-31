@@ -21,9 +21,8 @@ def play():
     computer = random.choice(choices)
 
     if player == "":
-        result_label.config(
-            text="Please choose Rock, Paper or Scissors"
-        )
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, "Choose Rock, Paper or Scissors")
         return
 
     if player == computer:
@@ -43,10 +42,10 @@ def play():
         result = "Computer wins!"
         computer_score += 1
 
-    result_label.config(
-        text=f"You: {player}\n"
-             f"Computer: {computer}\n\n"
-             f"{result}"
+    result_entry.delete(0, tk.END)
+    result_entry.insert(
+        0,
+        f"You: {player} | Computer: {computer} | {result}"
     )
 
     score_label.config(
@@ -59,11 +58,11 @@ def Reset():
 
     player_score = 0
     computer_score = 0
+
     player_choice.set("")
 
-    result_label.config(
-        text="Choose Rock, Paper or Scissors"
-    )
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, "Choose Rock, Paper or Scissors")
 
     score_label.config(
         text="Player: 0    |    Computer: 0"
@@ -115,6 +114,19 @@ scissors_button = tk.Radiobutton(
 )
 scissors_button.pack(pady=5)
 
+result_entry = tk.Entry(
+    window,
+    font=("Arial", 14),
+    width=50,
+    justify="center"
+)
+result_entry.pack(pady=15)
+
+result_entry.insert(
+    0,
+    "Choose Rock, Paper or Scissors"
+)
+
 play_button = tk.Button(
     window,
     text="PLAY",
@@ -122,21 +134,7 @@ play_button = tk.Button(
     width=15,
     command=play
 )
-play_button.pack(pady=20)
-
-result_label = tk.Label(
-    window,
-    text="Choose Rock, Paper or Scissors",
-    font=("Arial", 16)
-)
-result_label.pack(pady=10)
-
-score_label = tk.Label(
-    window,
-    text="Player: 0    |    Computer: 0",
-    font=("Arial", 14, "bold")
-)
-score_label.pack(pady=10)
+play_button.pack(pady=10)
 
 reset_button = tk.Button(
     window,
@@ -155,5 +153,12 @@ exit_button = tk.Button(
     command=Exit
 )
 exit_button.pack(pady=5)
+
+score_label = tk.Label(
+    window,
+    text="Player: 0    |    Computer: 0",
+    font=("Arial", 14, "bold")
+)
+score_label.pack(pady=10)
 
 window.mainloop()
